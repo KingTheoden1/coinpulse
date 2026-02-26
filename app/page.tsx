@@ -6,7 +6,6 @@ import Link from "next/link";
 import {cn, formatCurrency} from "@/lib/utils";
 import {TrendingUp, TrendingDown} from "lucide-react";
 import {fetcher} from "@/lib/coingecko.actions";
-import {await} from "react";
 
 const columns: DataTableColumn<TrendingCoin>[] = [
     {
