@@ -3,7 +3,7 @@ import Image from "next/image";
 import DataTable from "@/components/DataTable";
 // import header from "@/components/Header";
 import Link from "next/link";
-import {cn} from "@/lib/utils";
+import {cn, formatCurrency} from "@/lib/utils";
 import {TrendingUp, TrendingDown} from "lucide-react";
 import {fetcher} from "@/lib/coingecko.actions";
 import {await} from "react";
@@ -47,7 +47,7 @@ const columns: DataTableColumn<TrendingCoin>[] = [
         }
     },
     { header: 'Price', cellClassName: 'price-cell', cell: (coin) =>
-    `$${coin.item.data.price.toLocaleString()}` },
+    formatCurrency(coin.item.data.price) },
 ]
 
 const dummyCoins: TrendingCoin[] = [
@@ -113,7 +113,7 @@ const Page = async () => {
                     <Image src={coin.image.large} alt={coin.name} width={56} height={56} />
                     <div className="info">
                         <p>{coin.name} / {coin.symbol.toUpperCase()}</p>
-                        <h1>{coin.market_data.current_price.usd}</h1>
+                        <h1>{formatCurrency(coin.market_data.current_price.usd)}</h1>
                     </div>
                 </div>
             </div>

@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="29824644-fb61-419c-bb93-879c02204cbe" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/coingecko.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/coingecko.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +99,7 @@
       <workItem from="1771962176931" duration="4325000" />
       <workItem from="1771975955671" duration="5112000" />
       <workItem from="1772074368664" duration="239000" />
-      <workItem from="1772077954198" duration="1859000" />
+      <workItem from="1772077954198" duration="2613000" />
     </task>
     <servers />
   </component>
