@@ -17,4 +17,20 @@ export async function fetcher<T>(
         url: `${BASE_URL}/${endpoint}`,
         query: params,
     }, { skipEmptyString: true, skipNull: true });
+
+    const response = await fetch(url, {
+        headers: {
+            "x-ch-pro-api-key": API_KEY,
+            "Content-Type": "application/json",
+        } as Record<string, string>,
+        next: { revalidate }
+    });
+
+    if (!response.ok) {
+        const errorBody: CoinGeckoErrorBody = await response.json().catch(() => ({}));
+
+        throw new Error(`API Error: ${response.status}: ${errorBody.error || response.statusText}`);
+    }
+
+    return response.json();
 }
