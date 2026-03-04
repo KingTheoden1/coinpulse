@@ -62,17 +62,20 @@ const TrendingCoins = async () => {
   ];
 
   return (
-    <>
-      <p>Trending Coins</p>
+    <div id="trending-coins-section">
+      <h4>Trending Coins</h4>
+
       <div id="trending-coins">
         <DataTable
-          data={trendingCoins}
+          data={trendingCoins.coins.slice(0, 6) || []}
           columns={columns}
           rowKey={(coin) => coin.item.id}
           tableClassName="trending-coins-table"
+          headerCellClassName="py-3!"
+          bodyCellClassName="py-2!"
         />
       </div>
-    </>
+    </div>
   );
 };
 export default TrendingCoins;
