@@ -12,6 +12,7 @@ export async function fetcher<T>(
   endpoint: string,
   params?: QueryParams,
   revalidate = 60,
+  signal?: AbortSignal,
 ): Promise<T> {
   const url = qs.stringifyUrl(
     {
@@ -27,6 +28,7 @@ export async function fetcher<T>(
       'Content-Type': 'application/json',
     } as Record<string, string>,
     next: { revalidate },
+    signal,
   });
 
   if (!response.ok) {
