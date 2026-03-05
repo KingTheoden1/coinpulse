@@ -7,7 +7,8 @@
     <list default="true" id="29824644-fb61-419c-bb93-879c02204cbe" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/home/CoinOverview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/home/CoinOverview.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/home/TrendingCoins.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/home/TrendingCoins.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="34" />
+    <option name="cachedIndexableFilesCount" value="36" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
@@ -45,7 +46,7 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feat/navigation&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feat/candlestick-chart&quot;,
     &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
     &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
     &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
@@ -108,6 +109,7 @@
       <workItem from="1772077954198" duration="3391000" />
       <workItem from="1772129993855" duration="304000" />
       <workItem from="1772599094897" duration="2933000" />
+      <workItem from="1772683821987" duration="2196000" />
     </task>
     <servers />
   </component>
