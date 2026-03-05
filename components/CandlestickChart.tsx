@@ -68,6 +68,9 @@ const CandlestickChart = ({
       ...getChartConfig(height, showTime),
       width: container.clientWidth,
     });
+
+    chart.timeScale().applyOptions({ timeVisible: showTime });
+
     const series = chart.addSeries(CandlestickSeries, getCandlestickConfig());
 
     series.setData(convertOHLCData(ohlcData));
@@ -91,7 +94,7 @@ const CandlestickChart = ({
       chartRef.current = null;
       candlestickSeriesRef.current = null;
     };
-  }, [height]);
+  }, [height, period]);
 
   useEffect(() => {
     if (!candlestickSeriesRef.current) return;
