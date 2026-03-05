@@ -11,6 +11,13 @@ const CandlestickChart = ({
   initialPeriod = 'daily',
 }: CandlestickChartProps) => {
   const [loading, setLoading] = useState(false);
+  const [period, setPeriod] = useState(initialPeriod);
+  const handlePeriodChange = (newPeriod: Period) => {
+    if (newPeriod === period) return;
+
+    //   TODO: UPDATE PERIOD
+    setPeriod(newPeriod);
+  };
 
   return (
     <div id="candlestick-chart">
@@ -20,7 +27,12 @@ const CandlestickChart = ({
         <div className="button-group">
           <span className="text-sm mx-2 font-medium text-purple-100/50">Period:</span>
           {PERIOD_BUTTONS.map(({ value, label }) => (
-            <button key={value} className="config-button" onClick={() => {}} disabled={loading}>
+            <button
+              key={value}
+              className={period === value ? 'config-button-active' : 'config-button'}
+              onClick={() => handlePeriodChange(value)}
+              disabled={loading}
+            >
               {label}
             </button>
           ))}
