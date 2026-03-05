@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="29824644-fb61-419c-bb93-879c02204cbe" name="Changes" comment="" />
+    <list default="true" id="29824644-fb61-419c-bb93-879c02204cbe" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/CandlestickChart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/CandlestickChart.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -104,7 +107,8 @@
       <workItem from="1772077954198" duration="3391000" />
       <workItem from="1772129993855" duration="304000" />
       <workItem from="1772599094897" duration="2933000" />
-      <workItem from="1772683821987" duration="2707000" />
+      <workItem from="1772683821987" duration="2925000" />
+      <workItem from="1772736304728" duration="2187000" />
     </task>
     <servers />
   </component>
