@@ -99,7 +99,7 @@ const CandlestickChart = ({
               key={value}
               className={period === value ? 'config-button-active' : 'config-button'}
               onClick={() => handlePeriodChange(value)}
-              disabled={loading}
+              disabled={isPending}
             >
               {label}
             </button>
