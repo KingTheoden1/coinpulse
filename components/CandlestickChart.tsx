@@ -16,22 +16,29 @@ const CandlestickChart = ({
   const chartContainerRef = useRef<HTMLDivElement | null>(null);
   const chartRef = useRef<IChartApi | null>(null);
   const candlestickSeriesRef = useRef<ISeriesApi<'Candlestick'> | null>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   const [period, setPeriod] = useState(initialPeriod);
   const [ohlcData, setOhlcData] = useState<OHLCData[]>(data ?? []);
   const [isPending, startTransition] = useTransition();
 
-  const fetchOHLCData = async (selectedPeriod: Period) => {
+  const fetchOHLCData = async (selectedPeriod: Period, signal?: AbortSignal) => {
     try {
       const { days } = PERIOD_CONFIG[selectedPeriod];
 
-      const newData = await fetcher<OHLCData[]>(`/coins/${coinId}/ohlc`, {
-        vs_currency: 'usd',
-        days,
-      });
+      const newData = await fetcher<OHLCData[]>(
+        `/coins/${coinId}/ohlc`,
+        {
+          vs_currency: 'usd',
+          days,
+        },
+        60,
+        signal,
+      );
 
       setOhlcData(newData ?? []);
     } catch (e) {
+      if ((e as Error).name === 'AbortError') return;
       console.error('Error fetching OHLCData', e);
     }
   };
@@ -39,9 +46,16 @@ const CandlestickChart = ({
   const handlePeriodChange = (newPeriod: Period) => {
     if (newPeriod === period) return;
 
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+
     startTransition(async () => {
       setPeriod(newPeriod);
-      await fetchOHLCData(newPeriod);
+      await fetchOHLCData(newPeriod, controller.signal);
     });
   };
   useEffect(() => {
@@ -69,6 +83,9 @@ const CandlestickChart = ({
     observer.observe(container);
 
     return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
       observer.disconnect();
       chart.remove();
       chartRef.current = null;
