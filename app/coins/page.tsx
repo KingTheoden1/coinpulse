@@ -8,8 +8,9 @@ import CoinsPagination from '@/components/CoinsPagination';
 
 const Coins = async ({ searchParams }: NextPageProps) => {
   const { page } = await searchParams;
-
-  const currentPage = Number(page) || 1;
+  const rawPage = Array.isArray(page) ? page[0] : page;
+  const parsedPage = Number.parseInt(rawPage ?? '1', 10);
+  const currentPage = Number.isFinite(parsedPage) && parsedPage > 0 ? parsedPage : 1;
   const perPage = 10;
 
   const coinsData = await fetcher<CoinMarketData[]>('/coins/markets', {
@@ -24,12 +25,14 @@ const Coins = async ({ searchParams }: NextPageProps) => {
   const columns: DataTableColumn<CoinMarketData>[] = [
     {
       header: 'Rank',
+      headClassName: 'text-center w-20 p-0',
       cellClassName: 'rank-cell',
       cell: (coin) => (
-        <>
-          #{coin.market_cap_rank}
-          <Link href={`/coins/${coin.id}`} aria-label="View coin" />
-        </>
+        <div className="relative size-full">
+          <Link href={`/coins/${coin.id}`} aria-label={`View ${coin.name}`}>
+            #{coin.market_cap_rank}
+          </Link>
+        </div>
       ),
     },
     {

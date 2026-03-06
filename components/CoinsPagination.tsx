@@ -27,34 +27,50 @@ const CoinsPagination = ({ currentPage, totalPages, hasMorePages }: Pagination) 
       <PaginationContent className="pagination-content">
         <PaginationItem className="pagination-control prev">
           <PaginationPrevious
-            onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
+            href={`/coins?page=${currentPage - 1}`}
+            onClick={(e) => {
+              e.preventDefault();
+              currentPage > 1 && handlePageChange(currentPage - 1);
+            }}
             className={currentPage === 1 ? 'control-disabled' : 'control-button'}
+            aria-disabled={currentPage === 1}
+            tabIndex={currentPage === 1 ? -1 : 0}
           />
         </PaginationItem>
 
-        <div className="pagination-pages">
-          {pageNumbers.map((page, index) => (
-            <PaginationItem key={index}>
-              {page === ELLIPSIS ? (
-                <span className="ellipsis">...</span>
-              ) : (
-                <PaginationLink
-                  onClick={() => handlePageChange(page)}
-                  className={cn('page-link', {
-                    'page-link-active': currentPage === page,
-                  })}
-                >
-                  {page}
-                </PaginationLink>
-              )}
-            </PaginationItem>
-          ))}
-        </div>
+        {pageNumbers.map((page, index) => (
+          <PaginationItem key={index}>
+            {page === ELLIPSIS ? (
+              <PaginationEllipsis className="ellipsis" />
+            ) : (
+              <PaginationLink
+                href={`/coins?page=${page}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlePageChange(page);
+                }}
+                className={cn('page-link', {
+                  'page-link-active': currentPage === page,
+                })}
+                aria-disabled={currentPage === page}
+                tabIndex={currentPage === page ? -1 : 0}
+              >
+                {page}
+              </PaginationLink>
+            )}
+          </PaginationItem>
+        ))}
 
         <PaginationItem className="pagination-control next">
           <PaginationNext
-            onClick={() => !isLastPage && handlePageChange(currentPage + 1)}
+            href={`/coins?page=${currentPage + 1}`}
+            onClick={(e) => {
+              e.preventDefault();
+              !isLastPage && handlePageChange(currentPage + 1);
+            }}
             className={isLastPage ? 'control-disabled' : 'control-button'}
+            aria-disabled={isLastPage}
+            tabIndex={isLastPage ? -1 : 0}
           />
         </PaginationItem>
       </PaginationContent>
