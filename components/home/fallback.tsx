@@ -127,7 +127,7 @@ export const CategoriesFallback = () => {
       <DataTable
         columns={columns}
         data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-        rowKey={(index) => index}
+        rowKey={(_, index) => index}
         tableClassName="mt-3"
       />
     </div>
