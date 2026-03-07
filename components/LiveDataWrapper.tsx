@@ -86,6 +86,8 @@ const LiveDataWrapper = ({ children, coinId, poolId, coin, coinOHLCData }: LiveD
           />
         </div>
       )}
+
+      {children}
     </section>
   );
 };

@@ -21,7 +21,7 @@ export async function fetcher<T>(
     { skipEmptyString: true, skipNull: true },
   );
 
-  const isPro = url.includes('pro-api');
+  const isPro = new URL(url).hostname.includes('pro-api');
   const headerName = isPro ? 'x-cg-pro-api-key' : 'x-cg-demo-api-key';
 
   const response = await fetch(url, {
@@ -99,6 +99,6 @@ export async function searchCoins(query: string): Promise<SearchCoin[]> {
     return response.coins || [];
   } catch (error) {
     console.error('Error searching coins:', error);
-    return [];
+    throw error;
   }
 }

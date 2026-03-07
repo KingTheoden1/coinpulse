@@ -82,7 +82,11 @@ export const SearchModal = ({
     [searchQuery],
   );
 
-  const { data: searchResults = [], isValidating: isSearching } = useSWR<SearchCoin[]>(
+  const {
+    data: searchResults = [],
+    isValidating: isSearching,
+    error: searchError,
+  } = useSWR<SearchCoin[]>(
     debouncedQuery ? ['coin-search', debouncedQuery] : null,
     ([, query]) => searchCoins(query as string),
     {
@@ -114,8 +118,8 @@ export const SearchModal = ({
   const isSearchEmpty = !isSearching && !hasQuery && !showTrending;
   const isTrendingListVisible = !isSearching && showTrending;
 
-  const isNoResults = !isSearching && hasQuery && searchResults.length === 0;
-  const isResultsVisible = !isSearching && hasQuery && searchResults.length > 0;
+  const isNoResults = !isSearching && !searchError && hasQuery && searchResults.length === 0;
+  const isResultsVisible = !isSearching && !searchError && hasQuery && searchResults.length > 0;
 
   return (
     <div id="search-modal">
@@ -137,6 +141,10 @@ export const SearchModal = ({
         </div>
 
         <CommandList className="list custom-scrollbar">
+          {searchError && (
+            <div className="empty text-red-500">Failed to fetch search results.</div>
+          )}
+
           {isSearching && <div className="empty">Searching...</div>}
 
           {isSearchEmpty && <div className="empty">Type to search for coins...</div>}
