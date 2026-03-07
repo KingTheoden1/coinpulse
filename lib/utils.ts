@@ -49,12 +49,8 @@ export function trendingClasses(value: number) {
 }
 
 export function timeAgo(date: string | number | Date): string {
-  const past = new Date(date);
-  if (isNaN(past.getTime())) {
-    return '';
-  }
-
   const now = new Date();
+  const past = new Date(date);
   const diff = now.getTime() - past.getTime(); // difference in ms
 
   const seconds = Math.floor(diff / 1000);

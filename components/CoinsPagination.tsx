@@ -16,7 +16,7 @@ const CoinsPagination = ({ currentPage, totalPages, hasMorePages }: Pagination) 
   const router = useRouter();
 
   const handlePageChange = (page: number) => {
-    router.push(`/coins?page=${page}`);
+    router.push(`/coins?page=${page}`, { scroll: false });
   };
 
   const pageNumbers = buildPageNumbers(currentPage, totalPages);
