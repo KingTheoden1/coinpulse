@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 
-const WS_BASE = `${process.env.NEXT_PUBLIC_COINGECKO_WEBSOCKET_URL}?x_cg_pro_api_key=${process.env.NEXT_PUBLIC_COINGECKO_API_KEY}`;
+const WS_URL = process.env.NEXT_PUBLIC_COINGECKO_WEBSOCKET_URL;
+const API_KEY = process.env.NEXT_PUBLIC_COINGECKO_API_KEY;
+
+const isPro = WS_URL?.includes('pro-stream');
+const authParam = isPro ? 'x_cg_pro_api_key' : 'x_cg_demo_api_key';
+const WS_BASE = `${WS_URL}?${authParam}=${API_KEY}`;
 
 export const useCoinGeckoWebSocket = ({ coinId, poolId, liveInterval }: UseCoinGeckoWebSocketProps): UseCoinGeckoWebSocketReturn => {
   const wsRef = useRef<WebSocket | null>(null);
