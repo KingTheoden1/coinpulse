@@ -5,17 +5,26 @@ import { ArrowUpRight } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
 import LiveDataWrapper from '@/components/LiveDataWrapper';
 import Converter from '@/components/Converter';
+import { notFound } from 'next/navigation';
 
 const Page = async ({ params }: NextPageProps) => {
   const { id } = await params;
 
-  const [coinData, coinOHLCData] = await Promise.all([
-    fetcher<CoinDetailsData>(`/coins/${id}`),
-    fetcher<OHLCData[]>(`/coins/${id}/ohlc`, {
-      vs_currency: 'usd',
-      days: 1,
-    }),
-  ]);
+  let coinData: CoinDetailsData;
+  let coinOHLCData: OHLCData[];
+
+  try {
+    [coinData, coinOHLCData] = await Promise.all([
+      fetcher<CoinDetailsData>(`/coins/${id}`),
+      fetcher<OHLCData[]>(`/coins/${id}/ohlc`, {
+        vs_currency: 'usd',
+        days: 1,
+      }),
+    ]);
+  } catch (err) {
+    console.error(`Error fetching coin data for ${id}:`, err);
+    notFound();
+  }
 
   const platform = coinData.asset_platform_id
     ? coinData.detail_platforms?.[coinData.asset_platform_id]

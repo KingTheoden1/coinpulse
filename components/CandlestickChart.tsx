@@ -27,12 +27,16 @@ const CandlestickChart = ({
   const chartRef = useRef<IChartApi | null>(null);
   const candleSeriesRef = useRef<ISeriesApi<'Candlestick'> | null>(null);
   const prevOhlcDataLength = useRef<number>(data?.length || 0);
+  const requestIdRef = useRef<number>(0);
 
   const [period, setPeriod] = useState(initialPeriod);
   const [ohlcData, setOhlcData] = useState<OHLCData[]>(data ?? []);
   const [isPending, startTransition] = useTransition();
 
   const fetchOHLCData = async (selectedPeriod: Period) => {
+    requestIdRef.current += 1;
+    const requestId = requestIdRef.current;
+
     try {
       // @ts-ignore
       const { days, interval } = PERIOD_CONFIG[selectedPeriod];
@@ -42,11 +46,15 @@ const CandlestickChart = ({
         days,
       });
 
-      startTransition(() => {
-        setOhlcData(newData ?? []);
-      });
+      if (requestId === requestIdRef.current) {
+        startTransition(() => {
+          setOhlcData(newData ?? []);
+        });
+      }
     } catch (e) {
-      console.error('Failed to fetch OHLCData', e);
+      if (requestId === requestIdRef.current) {
+        console.error('Failed to fetch OHLCData', e);
+      }
     }
   };
 
